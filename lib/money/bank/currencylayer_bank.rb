@@ -126,6 +126,13 @@ class Money
           add_rate(source, currency, rate)
           add_rate(currency, source, 1.0 / rate)
         end
+
+        # Update the rates hash with the source-source key to match the existing pattern
+        rates["#{source}#{source}"] = 1.0
+      
+        # Register the conversion for source to source
+        add_rate(source, source, 1.0)
+
         @rates_mem_timestamp = rates_timestamp
         rates
       end
